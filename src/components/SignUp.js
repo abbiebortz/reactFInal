@@ -17,10 +17,10 @@ function SignUp() {
                 },
                 body: JSON.stringify({ username, password })
             });
-
+    
             if (response.ok) {
-                alert('Account created successfully. Please log in.');  
-                navigate('/');  // Redirect to login page
+                alert('Account created successfully. Please log in.');  // Inform user to log in manually
+                navigate('/');  // Removed auto-redirect to login page
             } else {
                 const text = await response.text();  
                 alert('Failed to sign up: ' + text);
@@ -30,7 +30,7 @@ function SignUp() {
             alert('Failed to fetch. Check console for more details.');
         }
     };
-
+    
     return (
         <div className={styles.signupContainer}>
             <h1>Sign Up</h1>
@@ -52,7 +52,7 @@ function SignUp() {
                 <button type="submit" className={styles.button}>Sign Up</button>
             </form>
             <p className={styles.loginLinkText}>
-                Already have an account? <Link to="/login" className={styles.loginLink}>Log in here.</Link>
+                Already have an account? <Link to="/" className={styles.loginLink}>Log in here.</Link>
             </p>
         </div>
     );

@@ -54,48 +54,39 @@ const updateBudget = async (username, budgetItems) => {
             throw new Error('User not found');
         }
 
-        // Log the existing budgets before making changes
         console.log('Existing budgets before update:', user.budgets);
 
         for (let item of budgetItems) {
-            // Check if _id is provided, indicating this is an edit
             if (item._id) {
-                // Attempt to delete the old budget item
                 const deleteResult = await Budget.findByIdAndDelete(item._id);
                 console.log('Deleted budget item:', deleteResult);
 
-                // Verify deletion was successful before continuing
                 if (!deleteResult) {
                     console.error('Failed to delete budget item with _id:', item._id);
-                    // If deletion was not successful, skip this iteration
                     continue;
                 }
 
-                // If successful, remove the _id from the user's budget array
                 user.budgets = user.budgets.filter(budgetId => !budgetId.equals(item._id));
             }
 
-            // Create and save the new budget item
             const budget = new Budget({ ...item, user: user._id });
             const saveResult = await budget.save();
             console.log('Created new budget item:', saveResult);
 
-            // Push the new budget _id to the user's budgets array
             user.budgets.push(budget._id);
         }
 
-        // Save changes to the user
         const saveUserResult = await user.save();
         console.log('Updated user with new budgets:', saveUserResult);
 
-        // Optionally repopulate and return the updated budgets
-        await user.populate('budgets').execPopulate();
+        await user.populate('budgets');  // Corrected populate usage
         return user.budgets; 
     } catch (error) {
         console.error('Error updating budget:', error.message);
         throw error;
     }
 };
+
 
 
 // Export helper functions
