@@ -26,20 +26,23 @@ require('dotenv').config({
   const PORT = process.env.PORT || 5001;
   
   app.post('/api/signup', async (req, res) => {
-      const { username, password } = req.body;
-      try {
-          const existingUser = await getUserByUsername(username);
-          if (existingUser) {
-              return res.status(400).json({ error: "Username already exists" });
-          }
-          const hashedPassword = await bcrypt.hash(password, 10);
-          const newUser = await addUser({ username, password: hashedPassword });
-          
-      } catch (error) {
-          console.error(error);
-          res.status(500).json({ error: "Internal server error" });
-      }
-  });
+    const { username, password } = req.body;
+    try {
+        const existingUser = await getUserByUsername(username);
+        if (existingUser) {
+            return res.status(400).json({ error: "Username already exists" });
+        }
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newUser = await addUser({ username, password: hashedPassword });
+
+        
+        return res.status(200).json({ message: "User added successfully. Please log in." });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
   
   app.get('/api/user', authenticateToken, async (req, res) => {
       const user = await getUserByUsername(req.user.username);
