@@ -7,7 +7,7 @@ require('dotenv').config({
   const Budget = require('./models/Budget');
   
   // Connect to MongoDB
-  mongoose.connect(process.env.MONGODB_URI, {
+  mongoose.connect("mongodb://mongodb:27017/budget-app", {
       useNewUrlParser: true, 
       useUnifiedTopology: true
   })
