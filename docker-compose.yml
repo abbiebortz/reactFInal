@@ -11,7 +11,10 @@ services:
     depends_on:
       - mongodb
     environment:
-      - MONGO_URI=mongodb://mongodb:27017/budgetapp
+      - NODE_ENV=development
+      - JWT_SECRET=your_random_secret_here
+      - MONGODB_URI=mongodb://localhost:27017/budgetapp
+      - REACT_APP_API_URL=http://localhost:5001
   frontend:
     build: ./src
     ports:
