@@ -2,12 +2,12 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = function(app) {
   app.use(
-    '/api', // Assuming all routes starting with '/api' should be proxied
+    '/api', 
     createProxyMiddleware({
-      target: 'http://localhost:5001', // Update this to your actual server's URL and port
+      target: 'https://budget-application-m7296.ondigitalocean.app', 
       changeOrigin: true,
       pathRewrite: {
-        '^/api': '', // Optionally rewrite path
+        '^/api': '', 
       },
       secure: false,
     })

@@ -17,8 +17,7 @@ require('dotenv').config({
       process.exit(1);
   });
   
-  // Other code remains the same...
-  
+
 
 // Get a user by username
 const getUserByUsername = async (username) => {

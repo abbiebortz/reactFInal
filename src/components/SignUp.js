@@ -10,14 +10,14 @@ function SignUp() {
     const handleSignUp = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch('http://localhost:5001/api/signup', {  
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username, password })
-            });
-    
+            const response = await fetch('http://localhost:5001', {  
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password })
+        });
+
             if (response.ok) {
                 alert('Account created successfully. Please log in.');  // Inform user to log in manually
                 navigate('/');  // Removed auto-redirect to login page
