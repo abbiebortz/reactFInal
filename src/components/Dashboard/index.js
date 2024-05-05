@@ -42,7 +42,7 @@ const Dashboard = () => {
 
     const fetchItems = useCallback(async () => {
         try {
-            const response = await fetch('https://localhost:5001', {
+            const response = await fetch('http://localhost:5001/api/budget', {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             });
             if (!response.ok) {

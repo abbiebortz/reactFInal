@@ -23,7 +23,7 @@ require('dotenv').config({
   const { getUserByUsername, addUser, updateBudget, getBudgetByUsername } = require('./dbHelpers');
   const { authenticateToken } = require('./auth');
   
-  const PORT = process.env.PORT || 443;
+  const PORT = process.env.PORT || 5001;
   
   app.post('/api/signup', async (req, res) => {
     const { username, password } = req.body;

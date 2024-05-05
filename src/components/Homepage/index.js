@@ -12,29 +12,29 @@ function Homepage() {
     const handleLogin = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch('https://budget-application-zbnmx.ondigitalocean.app/', {
+            const response = await fetch('http://localhost:5001/api/login', {
                 method: 'POST',
                 headers: {
-                    
                     'Content-Type': 'application/json'
                 },
-                
                 body: JSON.stringify({ username, password })
             });
-
+    
             if (response.ok) {
                 const data = await response.json();
-                setAuthenticated(true, data.token);
-                setToken(data.token);  
+                setAuthenticated(true);
+                setToken(data.token);  // Assuming data.token is correctly provided by your backend
                 navigate('/dashboard');
             } else {
-                alert('Failed to log in. Please check your username and password.');
+                const text = await response.text();
+                alert('Failed to log in. Please check your username and password. Error: ' + text);
             }
         } catch (error) {
             console.error('Login failed:', error);
             alert('An error occurred. Please try again later.');
         }
     };
+    
 
     const goToSignUp = () => {
         navigate('/signup');

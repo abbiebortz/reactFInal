@@ -4,7 +4,7 @@ module.exports = function(app) {
   app.use(
     '/api', 
     createProxyMiddleware({
-      target: 'https://budget-application-m7296.ondigitalocean.app', 
+      target: 'http://localhost:5001', 
       changeOrigin: true,
       pathRewrite: {
         '^/api': '', 
